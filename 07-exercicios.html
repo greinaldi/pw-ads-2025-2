@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercício de Fixação 1</title>
+  <style>
+    .cor1 {
+      color: blue;
+      font-weight: bold;
+    }
+    .cor2 {
+      color: red;
+      font-style: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    function CadastroPessoa({ nome, sobrenome, dia, mes, ano }) {
+      const idade = 2025 - ano; 
+      return (
+        <>
+          {/* Fragmento */}
+          <p className="cor1">{nome} {sobrenome}</p>
+          <p className="cor2">{dia}/{mes}/{ano}</p>
+          <div>
+            Idade em 2025: {idade} anos
+          </div>
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      <CadastroPessoa nome="José" sobrenome="Eduardo" dia={15} mes={10} ano={1985} />
+    );
+  </script>
+  
+</body>
+</html>

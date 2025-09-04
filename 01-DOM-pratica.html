@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <div id="root"></div>
+
+     <script>
+    
+    // Variável constante de criação do parágrafo e depois do texto desse parágrafo
+    const parag = document.createElement('p')
+    parag.textContent = 'Teste de escrita de parágrafo'
+     
+    // para printar a constante criada, criar a constante root e adicionar o parágrafo
+    const root = document.getElementById('root')
+    root.appendChild(parag)
+
+    const novoParag = document.createElement('f')
+    novoParag.textContent = 'Novo parágrafo'
+
+    root.appendChild(novoParag)
+ 
+    // Criação de uma div de estilo e adição de elementos a div
+    const novaDiv = document.createElement('div')
+
+    novaDiv.textContent = 'DIV criada com JavaScript - Exercício'
+    novaDiv.style.border = '3px dotted green'
+    novaDiv.style.background = 'limegreen'
+    novaDiv.style.padding = '20px'
+    novaDiv.style.marginTop = '50px'
+    novaDiv.style.textAlign = 'center'
+    novaDiv.id = 'div-verde'
+    
+    // Adiciona ao root
+    root.appendChild(novaDiv)
+
+    /* Resumo
+    DOM é a forma como o navegador representa a página.
+    Com document.createElement criamos novos elementos.
+    Com getElementById pegamos elementos já existentes no HTML.
+    Com appendChild inserimos elementos dentro de outros.
+    Podemos alterar conteúdo (textContent) e estilos (style) via JavaScript.
+    */
+    </script>
+
+</body>
+</html>
