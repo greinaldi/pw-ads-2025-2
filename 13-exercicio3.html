@@ -11,28 +11,21 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   
   <div id="root"></div>
-
   <script type="text/babel">
     function Form() {
-      let nome, maiusc
+      const [nome, setNome] = React.useState("")
+      const [maiusc, setMaiusc] = React.useState(false)
 
-    
-      const nomeRef = React.useRef()
-      const maiuscRef = React.useRef()
-      const resultadoRef = React.useRef()
+      function handleChangeNome(event) {
+        const valor = event.target.value
+        setNome(maiusc ? valor.toUpperCase() : valor)
+      }
 
-      function handleChange(event) {
-        /*
-          Observe: <ref>.current equivale a
-          document.getElementById('id')
-        */
-        maiusc = maiuscRef.current.checked
+      function handleChangeMaiusc(event) {
+        const checked = event.target.checked
+        setMaiusc(checked)
 
-        nome = maiusc
-            ? nomeRef.current.value.toUpperCase()
-            : nomeRef.current.value
-
-        resultadoRef.current.textContent = nome
+        setNome(checked ? nome.toUpperCase() : nome.toLowerCase())
       }
 
       function handleSubmit(event) {
@@ -40,34 +33,40 @@
         alert(`Olá, ${nome}!`)
       }
 
-      return <>
-        <h1>Formulário React</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>
-              <span>Nome:</span> <br />
-              {
-
-                
-              }
-              <input ref={nomeRef} onChange={handleChange} />
-            </label>
-          </div>
-          <div>
-            <label>
-              <input type="checkbox" ref={maiuscRef} onChange={handleChange} />
-              <span>Colocar o nome em maiúsculas</span>
-            </label>
-          </div>
-          <div ref={resultadoRef} />
-          <div>
-            <button type="submit">Enviar</button>
-          </div>
-        </form>
-      </>
+      return (
+        <>
+          <h1>Formulário React</h1>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label>
+                <span>Nome:</span> <br />
+                <input 
+                  value={nome}
+                  onChange={handleChangeNome} 
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                <input 
+                  type="checkbox" 
+                  checked={maiusc} 
+                  onChange={handleChangeMaiusc} 
+                />
+                <span>Colocar o nome em maiúsculas</span>
+              </label>
+            </div>
+            <div>
+              Resultado: <strong>{nome}</strong>
+            </div>
+            <div>
+              <button type="submit">Enviar</button>
+            </div>
+          </form>
+        </>
+      )
     }
 
-    // querySelect('#root') é equivalente a getElementById('root')
     const root = ReactDOM.createRoot(document.querySelector('#root'))
     root.render(<Form />)
   </script>
