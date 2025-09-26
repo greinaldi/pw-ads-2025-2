@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cálculo da área de uma elipse</title>
+</head>
+<body>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  
+  <div id="root"></div>  
+
+  <script type="text/babel">
+
+    function Form() {
+      /* Criação das constantes de referência para adicionar ao formulário html e que pegam o valor para adicionar a conta da função */
+      const raioMaiorRef = React.useRef()
+      const raioMenorRef = React.useRef()
+      const areaRef = React.useRef()
+      
+      /* Função de cálculo da área de uma elipse */
+      function calculoOnChange(event) {
+        const raioMaior = Number(raioMaiorRef.current.value) /* a constante que recebe a informação e realiza a conta */
+        const raioMenor = Number(raioMenorRef.current.value)
+
+        const area = raioMaior * raioMenor * Math.PI /* A constante realiza o cálculo com os valores repassados por Ref */
+
+        /* Atribui o resultado no formato solicitado de 4 digitos e e no estilo decimal */
+        areaRef.current.textContent = area.toLocaleString(
+          'pt-br',
+          {  
+            style: 'decimal',
+            minimumFractionDigits: 4,
+            maximumFractionDigits: 4
+          }
+        )
+      }
+
+      /*O retorno da função é um formulário, que pega os dados referenciados das áreas para o cálculo da função e retorna o resultado 
+      diagramado em 4 dígitos. No input do label, está o tipo de dado recebido, o nome da variável de referência e a função para mudança
+      dos valores e depois no final uma div retorna o resultado final no formato.*/
+      return <>
+        <h1>Cálculo da área de uma elipse</h1>
+        <form>
+          <div>
+            <label>
+              <span>Medida do raio maior</span> <br />
+              <input type="number" ref={raioMaiorRef} onChange={calculoOnChange} />
+            </label>
+          </div>
+          <div>
+            <label>
+              <span>Cotação do dólar:</span> <br />
+              <input type="number" ref={raioMenorRef} onChange={calculoOnChange} />
+            </label>
+          </div>
+          <div ref={areaRef} />
+        </form>
+      </>
+    }
+
+    /* A constante root renderiza o formulário na função e retorna na tela em html */
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<Form />)
+
+  </script>
+  
+</body>
+</html>
