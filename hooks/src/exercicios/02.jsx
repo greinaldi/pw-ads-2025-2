@@ -1,13 +1,15 @@
 import * as React from 'react'
 
 function Greeting({initialName = ''}) {
-  // 🐨 inicialize o estado como o valor do localStorage
-  // 💰 window.localStorage.getItem('name') ?? initialName
-  const [name, setName] = React.useState(initialName)
+  // Inicializa o estado com o valor do localStorage ou initialName
+  const [name, setName] = React.useState(
+    () => window.localStorage.getItem('name') ?? initialName
+  )
 
-  // 🐨 Aqui é onde usamos `React.useEffect`.
-  // A função deve armazenar `name` no localStorage.
-  // 💰 window.localStorage.setItem('name', name)
+  // Salva o nome no localStorage sempre que ele mudar
+  React.useEffect(() => {
+    window.localStorage.setItem('name', name)
+  }, [name])
 
   function handleChange(event) {
     setName(event.target.value)
@@ -23,8 +25,8 @@ function Greeting({initialName = ''}) {
   )
 }
 
-function App() {
+function Exercicio02() {
   return <Greeting />
 }
 
-export default App
+export default Exercicio02
