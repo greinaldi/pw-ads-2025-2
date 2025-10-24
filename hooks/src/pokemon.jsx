@@ -6,8 +6,12 @@ const formatDate = date =>
     date.getSeconds(),
   ).padStart(2, '0')}.${String(date.getMilliseconds()).padStart(3, '0')}`
 
-// the delay argument is for faking things out a bit
+// ...existing code...
 function fetchPokemon(name, delay = 1500) {
+  if (!name) {
+    return Promise.reject(new Error('O nome do Pokémon é obrigatório'))
+  }
+
   const pokemonQuery = `
     query PokemonInfo($name: String) {
       pokemon(name: $name) {
@@ -26,38 +30,40 @@ function fetchPokemon(name, delay = 1500) {
     }
   `
 
+  const normalized = String(name).toLowerCase()
+
   return window
     .fetch('https://graphql-pokemon2.vercel.app/', {
       // learn more about this API here: https://graphql-pokemon2.vercel.app/
       method: 'POST',
       headers: {
         'content-type': 'application/json;charset=UTF-8',
-        delay: delay,
+        delay: String(delay),
       },
       body: JSON.stringify({
         query: pokemonQuery,
-        variables: {name: name.toLowerCase()},
+        variables: {name: normalized},
       }),
     })
     .then(async response => {
-      const {data} = await response.json()
-      if (response.ok) {
-        const pokemon = data?.pokemon
-        if (pokemon) {
-          pokemon.fetchedAt = formatDate(new Date())
-          return pokemon
-        } else {
-          return Promise.reject(new Error(`No pokemon with the name "${name}"`))
-        }
+      const payload = await response.json()
+      const data = payload?.data
+
+      if (!response.ok) {
+        const message = payload?.errors?.map(e => e.message).join('\n') || 'Erro na requisição'
+        return Promise.reject(new Error(message))
+      }
+
+      const pokemon = data?.pokemon
+      if (pokemon) {
+        pokemon.fetchedAt = formatDate(new Date())
+        return pokemon
       } else {
-        // handle the graphql errors
-        const error = {
-          message: data?.errors?.map(e => e.message).join('\n'),
-        }
-        return Promise.reject(error)
+        return Promise.reject(new Error(`No pokemon with the name "${name}"`))
       }
     })
 }
+// ...existing code...
 
 function PokemonInfoFallback({name}) {
   const initialName = React.useRef(name).current

@@ -26,18 +26,20 @@ function Tilt({children}) {
       'max-glare': 0.5,
     })
 
-  // 💰 Não se esqueça de retornar uma função de limpeza. VanillaTilt.init 
-  // vai adicionar um objeto ao seu DOM, precisando ser eliminado:
-  return () => tiltNode.vanillaTilt.destroy()
+    // 💰 Não se esqueça de retornar uma função de limpeza. VanillaTilt.init 
+    // vai adicionar um objeto ao seu DOM, precisando ser eliminado:
+    return () => {
+      tiltNode.vanillaTilt.destroy()
+      alert('Desmontado!')
+    }
+
+    /*
+      Quando um useEffect retorna uma função, como no caso acima, essa
+      função será executada na fase de DESMONTAGEM do componente, ou seja,
+      quando o componente for destruído ao descarregar a página
+    */
   
   }, [])
-  
-  
-
-  /* Quando um useEffect retorna uma função, como no caso acima, 
-  essa função será executada na fase de DESMONTAGEM do componente, ou seja, 
-  quando o componente for destruído ao descarregar a página.
-  */
   
   // 💰 Não se esqueça de especificar seu vetor de dependências! No nosso
   // caso, samemos que o nodo do tilt nunca muda, então ajuste o vetor para `[]`.
