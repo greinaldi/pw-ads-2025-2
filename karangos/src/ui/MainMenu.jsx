@@ -17,14 +17,14 @@ export default function BasicMenu() {
   return (
     <div>
       <IconButton
-       id="basic-button"
-       aria-controls={open ? 'basic-menu' : undefined}
-       aria-haspopup="true"
-       aria-expanded={open ? 'true' : undefined}
-       onClick={handleClick}
-       edge="start"
-       color="inherit"
-       aria-label="menu" sx={{ mr: 2 }}
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+        edge="start"
+        color="inherit"
+        aria-label="menu" sx={{ mr: 2 }}
      >
        <MenuIcon />
      </IconButton>

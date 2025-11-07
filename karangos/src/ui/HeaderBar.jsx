@@ -2,18 +2,15 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import MainMenu from './MainMenu'
+import MainMenu from './MainMenu';
 
-import logotipo from '../assets/karangos-logo-600px.png'
+import logotipo from '../assets/karangos-logo-600px.png';
 
 export default function HeaderBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" enableColorOnDark>
         <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-           <MenuIcon />
-         </IconButton>
           <MainMenu />
           <a href="/">
            <img src={logotipo} alt="Logotipo Karangos" title="Karangos &bull; Os velhinhos são nossa paixão" style={{ width: '300px' }} />
