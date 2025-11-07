@@ -12,6 +12,9 @@ import theme from './ui/theme'
 
 import FooterBar from './ui/FooterBar'
 
+import AppRoutes from './routes/AppRoutes'
+
+
 
 function App() {
  return (
@@ -22,6 +25,9 @@ function App() {
       
        <BrowserRouter>
          <HeaderBar />
+
+          <AppRoutes />
+
          <FooterBar />
        </BrowserRouter>
     
