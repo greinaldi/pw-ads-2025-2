@@ -23,7 +23,7 @@ export default function FooterBar() {
            color: 'secondary.light'
          }
        }}>
-       Desenvolvido e mantido com  <CoffeeIcon fontSize="small"/> por <a href="mailto:professor@email.com">ProfessorNome</a>
+       Desenvolvido e mantido com  <CoffeeIcon fontSize="small"/> por <a href="mailto:gabriel@email.com">Gabriel Reinaldi Silva</a>
      </Typography>
    </Box>
  </>
